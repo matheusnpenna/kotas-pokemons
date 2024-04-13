@@ -4,7 +4,7 @@ import { resolve } from 'path'
 export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: "src/",
-  css: ['./assets/css/app.css', './assets/scss/app.scss'],
+  css: ['/assets/css/app.css', '/assets/scss/app.scss'],
   vue: {
     propsDestructure: true
   },
