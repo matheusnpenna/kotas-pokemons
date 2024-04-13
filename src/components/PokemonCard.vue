@@ -25,6 +25,7 @@ interface PokemonCardProps {
 const props = defineProps<PokemonCardProps>();
 const info = ref<PokemonInfoType|null>(null)
 const success = data => {
+  console.log(data);
   info.value = data.value;
 };
 </script>
