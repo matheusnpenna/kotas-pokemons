@@ -1,7 +1,7 @@
 <template>
-  <ActionDispatcher :url="data.url" @success="success">
+  <ActionDispatcher :url="`${data.url}`" @success="success">
     <div class="pokemon-card-component text-center flex flex-col justify-center">
-      <NuxtImg v-if="info" class="poke-img" :src="info.sprites.front_default" :alt="data.name" />
+      <NuxtImg v-if="info" class="poke-img" :src="info.sprites.front_default" :alt="`${data.name}`" />
       <span class="font-bold mb-2">{{ data.name }}</span>
       <span v-if="info" class="text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
       <div v-if="info" class="flex items-center justify-center flex-wrap">
