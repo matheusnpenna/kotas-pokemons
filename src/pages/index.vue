@@ -1,40 +1,38 @@
 <template>
   <div class="home-view pt-8">
     <div class="container mx-auto px-44">
+      <SearchInput 
+        v-model="params.search" 
+        placeholder="Pesquise por nome ou código" 
+        class="mb-12"
+      />
       <h6 class="font-bold mb-8">Pokémons</h6>
       <div class="grid grid-cols-5 gap-4 place-content-center">
-        <template v-if="isFetching">
-          <SkeletonCard 
-            v-for="(item, i) in Array.from(10)"
-            :key="`skeleton-card-${i}`"
-          />
-        </template>
-        <template v-else-if="pokemons">
-          <PokemonCard 
-            v-for="(item, i) in pokemons"
-            :key="`poke-card-${i}`"
-            :data="item"
-          />
-        </template>
+        <PokemonCard 
+          v-for="(item, i) in pokemons"
+          :key="`poke-card-${i}`"
+          :data="item"
+        />
       </div>
     </div>
   </div>
 </template>
 <script setup>
 import { usePokemonApi } from "@/composable/api/pokemons"
-import SkeletonCard from "@/components/SkeletonCard";
+// import SkeletonCard from "@/components/SkeletonCard";
+import SearchInput from "@/components/SearchInput";
 import PokemonCard from "@/components/PokemonCard";
 const { getPokemons } = usePokemonApi();
 const pokemons = reactive([]);
 const endResults = ref(false);
 const params = ref({
+  search: "",
   limit: 24,
   offset: 0,
   page: 1
 });
-const search = ref("");
 
-const { isPending, isSuccess, isError, data, fetchNextPage, error } = useInfiniteQuery({
+const { data, fetchNextPage, error } = useInfiniteQuery({
   queryKey: ['getPokemons'],
   queryFn: async ({ pageParam }) => {
     const data = await getPokemons(pageParam);
@@ -80,7 +78,6 @@ onBeforeUnmount(() => {
 })
 </script>
 <style lang="scss" scoped>
-.home-view {
-}
+.home-view {}
 </style>
  

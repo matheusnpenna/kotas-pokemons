@@ -35,7 +35,6 @@ const pokemonApiMethods = usePokemonApi();
     },
     methodName: {
       type: String,
-      required: true
     },
     parameters: {
       type: [Object, Number, String],

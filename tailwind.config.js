@@ -8,6 +8,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        secondary: "#E1E1E1",
         grass: "#08FEC3",
         poison: "#AF08FE",
         water: "#00A3FF",
@@ -23,7 +24,7 @@ export default {
     },
   },
   safelist: [{
-    pattern: /(bg|text|border)-(grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
+    pattern: /(bg|text|border)-(secondary|grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
   }],
   plugins: [],
 }
