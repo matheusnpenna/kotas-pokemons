@@ -1,20 +1,22 @@
 <template>
   <ActionDispatcher :url="`${data.url}`" @success="success">
-    <div class="pokemon-card-component text-center flex flex-col justify-center">
-      <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${data.name}`" />
-      <span class="font-bold mb-2">{{ data.name }}</span>
-      <span v-if="info" class="text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
-      <div v-if="info" class="flex items-center justify-center flex-wrap">
-        <template v-for="(item, i) in info.types">
-          <span 
-            class="type-tag flex items-center justify-center text-white py-1 px-2 uppercase text-[8px]" 
-            :class="`bg-${item.type.name} ${i < info.types.length - 1 ? 'mr-1' : ''}`"
-          >
-            {{ item.type.name }}
-          </span>
-        </template>
+    <NuxtLink :to="'/pokemon/'+pokemonID">
+      <div class="pokemon-card-component text-center flex flex-col justify-center">
+        <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${data.name}`" />
+        <span class="font-bold mb-2">{{ data.name }}</span>
+        <span v-if="info" class="text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
+        <div v-if="info" class="flex items-center justify-center flex-wrap">
+          <template v-for="(item, i) in info.types">
+            <span 
+              class="type-tag flex items-center justify-center text-white py-1 px-2 uppercase text-[8px]" 
+              :class="`bg-${item.type.name} ${i < info.types.length - 1 ? 'mr-1' : ''}`"
+            >
+              {{ item.type.name }}
+            </span>
+          </template>
+        </div>
       </div>
-    </div>
+    </NuxtLink>
   </ActionDispatcher>
 </template>
 <script setup lang="ts">
@@ -29,7 +31,7 @@ const success = data => {
   info.value = data.value;
 };
 
-
+const pokemonID = computed(() => info.value ? info.value.id : '');
 const imgSrc = computed(() => {
   const sprites = info.value?.sprites;
   if (!sprites) return "";
