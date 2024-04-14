@@ -27,23 +27,32 @@ import PokemonCard from "@/components/PokemonCard";
 const { getPokemons } = usePokemonApi();
 const pokemons = reactive([]);
 const endResults = ref(false);
+const params = ref({
+  limit: 24,
+  offset: 0,
+  page: 1
+});
 const search = ref("");
 
 const { isPending, isSuccess, isError, data, fetchNextPage, error } = useInfiniteQuery({
   queryKey: ['getPokemons'],
-  queryFn: async (p) => {
-    const data = await getPokemons({ ...p, limit: 24 });
+  queryFn: async ({ pageParam }) => {
+    const data = await getPokemons(pageParam);
     pokemons.push(...data.results);
     return data;
-  },
-  getPreviousPageParam(firstPage) {
-    return firstPage.previous;
   },
   getNextPageParam(lastPage) {
     if (!lastPage.next) {
       endResults.value = true;
+      return false;
     }
-    return lastPage.next;
+    params.value = {
+      ...params.value,
+      page: params.value.page + 1,
+      offset: params.value.offset + params.value.limit
+    };
+
+    return params.value;
   }
 })
 

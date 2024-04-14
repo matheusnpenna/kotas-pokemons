@@ -1,7 +1,7 @@
 <template>
   <ActionDispatcher :url="`${data.url}`" @success="success">
     <div class="pokemon-card-component text-center flex flex-col justify-center">
-      <NuxtImg v-if="info" class="poke-img" :src="info.sprites.front_default" :alt="`${data.name}`" />
+      <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${data.name}`" />
       <span class="font-bold mb-2">{{ data.name }}</span>
       <span v-if="info" class="text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
       <div v-if="info" class="flex items-center justify-center flex-wrap">
@@ -18,6 +18,7 @@
   </ActionDispatcher>
 </template>
 <script setup lang="ts">
+import { get_key_value } from "@/functions";
 import type { PokemonType, PokemonInfoType } from "@/types";
 interface PokemonCardProps {
   data: PokemonType
@@ -27,6 +28,13 @@ const info = ref<PokemonInfoType|null>(null)
 const success = data => {
   info.value = data.value;
 };
+
+
+const imgSrc = computed(() => {
+  const sprites = info.value?.sprites;
+  if (!sprites) return "";
+  return get_key_value(sprites, ['front_default', 'front_shiny']);
+})
 </script>
 <style lang="scss" scoped>
 .pokemon-card-component {
