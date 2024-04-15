@@ -91,3 +91,8 @@ export interface VersionGameIndex {
   game_index: number;
   version: NamedAPIResource;
 }
+
+export interface Parameters extends Record<string, string> {
+  offset: string;
+  limit: string;
+}

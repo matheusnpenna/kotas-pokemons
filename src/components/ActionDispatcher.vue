@@ -24,9 +24,9 @@
 </template>
 
 <script setup>
-import { usePokemonApi } from "@/composable/api/pokemons"
+import { usePokemonStore } from "@/store/pokemon";
 const emit = defineEmits(['success', 'error']);
-const pokemonApiMethods = usePokemonApi();
+const store = usePokemonStore();
 
   const props = defineProps({
     url: {
@@ -50,7 +50,7 @@ const pokemonApiMethods = usePokemonApi();
       if (props.url) {
         return $fetch(props.url);
       }
-      return pokemonApiMethods[props.methodName](props.parameters)
+      return store[props.methodName](props.parameters)
     }
   });
 

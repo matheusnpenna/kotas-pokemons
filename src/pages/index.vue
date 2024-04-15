@@ -50,15 +50,9 @@ const { fetchNextPage } = useInfiniteQuery({
 
 watch(search, (v) => {
   if (v.length == 0) {
-    useQuery({ 
-      queryKey: ['getPokemons'],
-      queryFn: async () => await store.getPokemons(params.value),
-    })
+    store.getPokemons(params.value);
   } else {
-    useQuery({
-      queryKey: ['filterPokemon'+ search.value], 
-      queryFn: async () => await store.filterPokemon(search.value)
-    })
+    store.filterPokemon(search.value);
   }
 })
 
