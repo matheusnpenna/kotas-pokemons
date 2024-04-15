@@ -96,3 +96,12 @@ export interface Parameters extends Record<string, string> {
   offset: string;
   limit: string;
 }
+
+export interface AbilityEffectType {
+  effect: string;
+  short_effect: string;
+  language: {
+    name: string;
+    url: string;
+  }
+}

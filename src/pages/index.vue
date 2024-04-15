@@ -6,7 +6,7 @@
         placeholder="Pesquise por nome ou código" 
         class="mb-12"
       />
-      <h6 class="font-bold mb-8">Pokémons</h6>
+      <h3 class="font-bold mb-8">Pokémons</h3>
       <div class="grid grid-cols-5 gap-4 place-content-center">
         <PokemonCard 
           v-for="(item, i) in store.pokemons"
@@ -79,7 +79,4 @@ onBeforeUnmount(() => {
   });
 })
 </script>
-<style lang="scss" scoped>
-.home-view {}
-</style>
  

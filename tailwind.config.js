@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        quicksand: ['Quicksand']
+      },
       colors: {
         secondary: "#E1E1E1",
         grass: "#08FEC3",
@@ -19,12 +22,13 @@ export default {
         normal: "#C4C4C4",
         flying: "#5317FC",
         default: "#0E0E0E",
+        "second-gray": "616161",
         bug: "#0E0E0E",
       }
     },
   },
   safelist: [{
-    pattern: /(bg|text|border)-(secondary|grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
+    pattern: /(bg|text|border)-(second-gray|secondary|grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
   }],
   plugins: [],
 }
