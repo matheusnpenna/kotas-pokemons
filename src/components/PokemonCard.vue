@@ -1,9 +1,9 @@
 <template>
-  <ActionDispatcher :url="`${data.url}`" @success="success">
-    <!-- <NuxtLink :to="'/pokemon/'+pokemonID"> -->
+  <ActionDispatcher :url="`${props.data.url}`" @success="success">
+    <NuxtLink :to="'/pokemon/'+pokemonID">
       <div class="pokemon-card-component text-center flex flex-col justify-center">
-        <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${data.name}`" />
-        <span class="font-bold mb-2">{{ data.name }}</span>
+        <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${props.data.name}`" />
+        <span class="font-bold mb-2">{{ props.data.name }}</span>
         <span v-if="info" class="text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
         <div v-if="info" class="flex items-center justify-center flex-wrap">
           <template v-for="(item, i) in info.types">
@@ -16,27 +16,27 @@
           </template>
         </div>
       </div>
-    <!-- </NuxtLink> -->
+    </NuxtLink>
   </ActionDispatcher>
 </template>
 <script setup lang="ts">
-import { get_key_value } from "@/functions";
-import type { PokemonType, PokemonInfoType } from "@/types";
 interface PokemonCardProps {
   data: PokemonType
 }
+import { get_key_value } from "@/functions";
+import type { PokemonType, PokemonInfoType } from "@/types";
 const props = defineProps<PokemonCardProps>();
-const info = ref<PokemonInfoType|null>(null)
+const info = ref<PokemonInfoType|null>(null);
+//@ts-ignore
 const success = data => {
   info.value = data.value;
 };
-
-const pokemonID = computed(() => info.value ? info.value.id : '');
+const pokemonID = computed(() => info?.value?.id || props.data.name);
 const imgSrc = computed(() => {
   const sprites = info.value?.sprites;
   if (!sprites) return "";
   return get_key_value(sprites, ['front_default', 'front_shiny']);
-})
+});
 </script>
 <style lang="scss" scoped>
 .pokemon-card-component {
