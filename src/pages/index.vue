@@ -2,14 +2,14 @@
   <div class="home-view pt-8">
     <div class="container mx-auto px-44">
       <SearchInput 
-        v-model="params.search" 
+        v-model="search" 
         placeholder="Pesquise por nome ou código" 
         class="mb-12"
       />
       <h6 class="font-bold mb-8">Pokémons</h6>
       <div class="grid grid-cols-5 gap-4 place-content-center">
         <PokemonCard 
-          v-for="(item, i) in pokemons"
+          v-for="(item, i) in store.pokemons"
           :key="`poke-card-${i}`"
           :data="item"
         />
@@ -18,27 +18,21 @@
   </div>
 </template>
 <script setup>
-import { usePokemonApi } from "@/composable/api/pokemons"
-// import SkeletonCard from "@/components/SkeletonCard";
+import { usePokemonStore } from "@/store/pokemon";
 import SearchInput from "@/components/SearchInput";
 import PokemonCard from "@/components/PokemonCard";
-const { getPokemons } = usePokemonApi();
-const pokemons = reactive([]);
+const store = usePokemonStore();
 const endResults = ref(false);
+const search = ref("");
 const params = ref({
-  search: "",
   limit: 24,
   offset: 0,
   page: 1
 });
 
-const { data, fetchNextPage, error } = useInfiniteQuery({
+const { fetchNextPage } = useInfiniteQuery({
   queryKey: ['getPokemons'],
-  queryFn: async ({ pageParam }) => {
-    const data = await getPokemons(pageParam);
-    pokemons.push(...data.results);
-    return data;
-  },
+  queryFn: async ({ pageParam }) => await store.getPokemons(pageParam),
   getNextPageParam(lastPage) {
     if (!lastPage.next) {
       endResults.value = true;
@@ -51,6 +45,20 @@ const { data, fetchNextPage, error } = useInfiniteQuery({
     };
 
     return params.value;
+  }
+})
+
+watch(search, (v) => {
+  if (v.length == 0) {
+    useQuery({ 
+      queryKey: ['getPokemons'],
+      queryFn: async () => await store.getPokemons(params.value),
+    })
+  } else {
+    useQuery({
+      queryKey: ['filterPokemon'+ search.value], 
+      queryFn: async () => await store.filterPokemon(search.value)
+    })
   }
 })
 

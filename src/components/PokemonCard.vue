@@ -1,6 +1,6 @@
 <template>
   <ActionDispatcher :url="`${data.url}`" @success="success">
-    <NuxtLink :to="'/pokemon/'+pokemonID">
+    <!-- <NuxtLink :to="'/pokemon/'+pokemonID"> -->
       <div class="pokemon-card-component text-center flex flex-col justify-center">
         <NuxtImg v-if="imgSrc" class="poke-img" :src="imgSrc" :alt="`${data.name}`" />
         <span class="font-bold mb-2">{{ data.name }}</span>
@@ -16,7 +16,7 @@
           </template>
         </div>
       </div>
-    </NuxtLink>
+    <!-- </NuxtLink> -->
   </ActionDispatcher>
 </template>
 <script setup lang="ts">
