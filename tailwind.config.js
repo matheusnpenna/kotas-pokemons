@@ -22,8 +22,9 @@ export default {
         normal: "#C4C4C4",
         flying: "#5317FC",
         default: "#0E0E0E",
-        "second-gray": "616161",
+        "second-gray": "#616161",
         bug: "#0E0E0E",
+        blue: "#00A3FF",
       }
     },
   },

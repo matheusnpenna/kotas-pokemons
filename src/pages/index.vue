@@ -1,13 +1,15 @@
 <template>
   <div class="home-view pt-8">
-    <div class="container mx-auto px-44">
-      <SearchInput 
-        v-model="search" 
-        placeholder="Pesquise por nome ou código" 
-        class="mb-12"
-      />
+    <div class="container mx-auto px-20 lg:px-44">
+      <div class="pr-8">
+        <SearchInput 
+          v-model="search" 
+          placeholder="Pesquise por nome ou código" 
+          class="mb-12"
+        />
+      </div>
       <h3 class="font-bold mb-8">Pokémons</h3>
-      <div class="grid grid-cols-5 gap-4 place-content-center">
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 content-end">
         <PokemonCard 
           v-for="(item, i) in store.pokemons"
           :key="`poke-card-${i}`"
@@ -18,9 +20,9 @@
   </div>
 </template>
 <script setup>
-import SearchInput from "@/components/SearchInput";
-import PokemonCard from "@/components/PokemonCard";
-import { usePokemonStore } from "@/store/pokemon";
+import SearchInput from "~/components/SearchInput";
+import PokemonCard from "~/components/PokemonCard";
+import { usePokemonStore } from "~/store/pokemon";
 const store = usePokemonStore();
 const endResults = ref(false);
 const search = ref("");

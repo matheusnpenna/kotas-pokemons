@@ -1,9 +1,9 @@
 <template>
-  <ActionDispatcher :url="`${props.data.url}`" @success="success">
-    <NuxtLink :to="'/pokemon/'+pokemonID">
-      <div class="w-[153px] h-[190px] bg-white rounded-lg text-center flex flex-col justify-center">
-        <NuxtImg v-if="imgSrc" class="object-contain h-20" :src="imgSrc" :alt="`${props.data.name}`" />
-        <span class="text-base font-bold mb-2">{{ props.data.name }}</span>
+  <ActionDispatcher method-name="getPokemonInfo" :parameters="data.name" @success="success">
+    <NuxtLink v-if="info" :to="'/pokemon/'+data.name">
+      <div class="w-[153px] h-[190px] bg-white rounded-lg text-center flex flex-col items-center justify-center">
+        <NuxtImg v-if="imgSrc" class="object-contain h-20" :src="imgSrc" :alt="`${info.name}`" />
+        <span class="text-base font-bold mb-2">{{ info.name }}</span>
         <span v-if="info" class="quicksand text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
         <div v-if="info" class="flex items-center justify-center flex-wrap">
           <template v-for="(item, i) in info.types">
@@ -23,8 +23,8 @@
 interface PokemonCardProps {
   data: PokemonType
 }
-import { get_key_value } from "@/functions";
-import type { PokemonType, PokemonInfoType } from "@/types";
+import { get_key_value } from "~/functions";
+import type { PokemonType, PokemonInfoType } from "~/types";
 const props = defineProps<PokemonCardProps>();
 const info = ref<PokemonInfoType|null>(null);
 //@ts-ignore

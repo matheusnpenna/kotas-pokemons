@@ -16,17 +16,20 @@
         </div>
       </div>
 
-      <div class="card flex flex-col items-center justify-center rounded-lg px-4">
+      <div class="card flex flex-col items-center justify-center rounded-lg px-4 mb-16">
         <h6 class="font-bold text-center mb-4">Habilidades</h6>
         <div v-for="effect in abilities_effect_entries" class="py-4 w-full border-top">
           <span class="text-xs text-second-gray">{{ effect.short_effect }}</span>
         </div>
       </div>
+      <div class="text-center">
+        <NuxtLink to="/" class="font-bold text-blue">Voltar</NuxtLink>
+      </div>
     </div>
   </div>
 </template>
 <script setup lang="ts">
-import { get_key_value } from "@/functions";
+import { get_key_value } from "~/functions";
 import type { PokemonInfoType } from "~/types";
 const { params } = useRoute();
 const { data } = await useAsyncData(

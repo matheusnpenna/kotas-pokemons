@@ -8,7 +8,7 @@
   </header>
 </template>
 <script setup>
-  import AppLogo from "@/components/AppLogo";
+  import AppLogo from "~/components/AppLogo";
 </script>
 <style>
 .app-header {

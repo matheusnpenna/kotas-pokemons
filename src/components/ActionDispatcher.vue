@@ -8,8 +8,7 @@
 
     <div
       v-else-if="error"
-      class="error centering text-center"
-      :class="{ 'p-5': !small }"
+      class="error centering text-center p-5"
     >
       <div class="text-secondary mb-3">
         O recurso que você está buscando não foi encontrado.
@@ -24,15 +23,11 @@
 </template>
 
 <script setup>
-import { usePokemonStore } from "@/store/pokemon";
+import { usePokemonStore } from "~/store/pokemon";
 const emit = defineEmits(['success', 'error']);
 const store = usePokemonStore();
 
   const props = defineProps({
-    url: {
-      type: [String],
-      default: null
-    },
     methodName: {
       type: String,
     },
@@ -42,16 +37,9 @@ const store = usePokemonStore();
     }
   });
 
-  const key = props.url || `${props.methodName}${JSON.stringify(props.parameters)}`;
-
   const { isPending, isSuccess, isError, data, error } = useQuery({
-    queryKey: [key],
-    queryFn: () => {
-      if (props.url) {
-        return $fetch(props.url);
-      }
-      return store[props.methodName](props.parameters)
-    }
+    queryKey: [`${props.methodName}${JSON.stringify(props.parameters)}`],
+    queryFn: async () => await store[props.methodName](props.parameters)
   });
 
   watch(isError, v => {

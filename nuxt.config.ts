@@ -8,9 +8,6 @@ export default defineNuxtConfig({
   vue: {
     propsDestructure: true
   },
-  alias: {
-    '@': resolve(__dirname, "./src/")
-  },
   nitro: {
     preset: 'vercel-edge',
   },
