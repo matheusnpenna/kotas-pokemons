@@ -27,7 +27,7 @@
 </template>
 <script setup lang="ts">
 import { get_key_value } from "@/functions";
-import type { PokemonInfoType, AbilityEffectType } from "~/types";
+import type { PokemonInfoType } from "~/types";
 const { params } = useRoute();
 const { data } = await useAsyncData(
   "pokemon-details-"+ params.id,
