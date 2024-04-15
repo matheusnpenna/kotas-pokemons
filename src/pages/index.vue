@@ -18,9 +18,9 @@
   </div>
 </template>
 <script setup>
-import { usePokemonStore } from "@/store/pokemon";
 import SearchInput from "@/components/SearchInput";
 import PokemonCard from "@/components/PokemonCard";
+import { usePokemonStore } from "@/store/pokemon";
 const store = usePokemonStore();
 const endResults = ref(false);
 const search = ref("");
