@@ -2,13 +2,13 @@
 
 Pokemon catalog using pokeApi [https://pokeapi.co/](https://pokeapi.co/ "https://pokeapi.co/")
 
->  This is a challenge by [Coodesh](https://coodesh.com/)
+>  This is a challenge by [Coodesh](https://coodesh.com/){:target="_blank"}
 
 ## Access this project through the link below 
 
 This project is avaiable [here](https://matheuspenna-kotas-pokemons.vercel.app/).
 
-## How to run
+## How to setup and run
 
 Make sure to install the dependencies:
 
