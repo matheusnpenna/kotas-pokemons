@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { get_key_value } from "~/functions";
+import { get_src_in_sprites } from "~/functions";
 import type { PokemonInfoType } from "~/types";
 const { params } = useRoute();
 const { data } = await useAsyncData(
@@ -38,7 +38,7 @@ const { data } = await useAsyncData(
 );
 const pokemon = data.value as PokemonInfoType;
 //@ts-ignore
-const imgSrc = pokemon ? get_key_value(pokemon.sprites, ['front_default', 'front_shiny']) : "";
+const imgSrc = pokemon ? get_src_in_sprites(pokemon.sprites, ['front_default', 'front_shiny']) : "";
 const { data: abData, status: abStatus } = await useAsyncData(
   "pokemon-ability-"+ pokemon.id,
   async () => {

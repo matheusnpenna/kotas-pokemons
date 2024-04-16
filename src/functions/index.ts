@@ -1,5 +1,5 @@
 
-export function get_key_value(
+export function get_src_in_sprites(
   obj: { [key in string] : string | Object }, 
   prefered_keys: string[]
 ): string {
@@ -15,7 +15,7 @@ export function get_key_value(
       } else if (typeof obj[key] == "object" && key == "other") {
         for (let j in obj[key]) {
           //@ts-ignore
-          const v = get_key_value(obj[key][j], prefered_keys);
+          const v = get_src_in_sprites(obj[key][j], prefered_keys);
           if (v) {
             value = v;
             break;

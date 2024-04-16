@@ -1,6 +1,6 @@
 <template>
   <ActionDispatcher method-name="getPokemonInfo" :parameters="props.data.name" @success="success">
-    <NuxtLink :to="'/pokemon/'+props.data.name">
+    <NuxtLink :to="'/pokemon/'+props.data.name" target="_blank">
       <div class="pokemon-card-component w-full h-[250px] md:h-[190px] bg-white rounded-lg text-center flex flex-col items-center justify-center py-4">
         <NuxtImg v-if="imgSrc" class="object-contain h-20" fit="contain" :src="imgSrc" :alt="`${props.data.name}`" loading="lazy" />
         <span class="text-base font-bold mb-2">{{ props.data.name }}</span>
@@ -24,7 +24,7 @@ interface PokemonCardProps {
   data: PokemonType
 }
 import type { PokemonType, PokemonInfoType } from "~/types";
-import { get_key_value } from "~/functions";
+import { get_src_in_sprites } from "~/functions";
 const props = defineProps<PokemonCardProps>();
 const pokemonData = ref<PokemonInfoType | null>(null);
 
@@ -36,7 +36,7 @@ const success = async data => {
 const imgSrc = computed(() => {
   return pokemonData.value && pokemonData.value?.sprites ? 
     //@ts-ignore
-    get_key_value(pokemonData.value.sprites, ['front_default', 'front_shiny']) : "";
+    get_src_in_sprites(pokemonData.value.sprites, ['front_default', 'front_shiny']) : "";
 });
 </script>
 <style lang="scss" scoped>
