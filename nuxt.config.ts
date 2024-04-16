@@ -44,10 +44,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Kotas Pokemon Challenge - Matheus Penna',
       meta: [
-        { name: 'description', content: 'Kotas Pokemon Challenge by Coodesh' }
-      ],
-      link: [
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
+        { name: 'description', content: 'Kotas Pokemon Challenge by Coodesh - Matheus Penna' }
       ]
     }
   },
