@@ -76,4 +76,5 @@ This project was made using the following technologies:
 #### About the usability
 - I added a simple loading to better inform the user of the application's status when requesting data from the API
 - To facilitate sharing the page, I added a parameter called search to the URL in order to be able to search based on the parameter passed in the URL and thus share the URL with the search to be performed.
+- I improved infinite scroll to use observer and enable infinite scroll to work based on the element of the dom that is being scrolled instead of working based on the entire document. This way, the element's scrollbar can trigger infinite scrolling.
 
