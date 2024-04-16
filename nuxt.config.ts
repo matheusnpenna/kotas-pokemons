@@ -34,7 +34,8 @@ export default defineNuxtConfig({
         }
       }
     ],
-    "@nuxtjs/sitemap"
+    "@nuxtjs/sitemap",
+    '@nuxt/test-utils/module'
   ],
   pinia: {
     storesDirs: ['./src/stores/**']

@@ -27,6 +27,9 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  layout: 'default'
+})
 import LoadingSpinner from "~/components/LoadingSpinner.vue";
 import SearchInput from "~/components/SearchInput";
 import PokemonCard from "~/components/PokemonCard";
@@ -78,17 +81,6 @@ watch(search, (v) => {
     store.filterPokemon(search.value);
   }
 })
-
-// const handleInfinityScroll = () => {
-//   if (
-//     window.scrollY + window.innerHeight >=
-//     document.body.scrollHeight - 200
-//   ) {
-//     if (!endResults.value) {
-//       fetchNextPage();
-//     }
-//   }
-// }
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
