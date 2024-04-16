@@ -37,18 +37,19 @@ const props = defineProps({
   }
 });
 
-const { isPending, isSuccess, isError, data, error, refetch } = useQuery({
+const { isPending, isSuccess, isError, data, error } = useQuery({
   queryKey: [`${props.methodName}`, props.parameters],
   queryFn: async () => await store[props.methodName](props.parameters)
 });
 
-watch(isError, v => {
-  if (v) emit('error', error);
-});
 
-watch(isSuccess, v => {
-  if (v) emit('success', data);
-});
+watch(data, v => {
+  if (isSuccess.value) {
+    emit('success', v);
+  } else if (isError.value) {
+    emit('error', error.value);
+  }
+}, { immediate: true })
 </script>
 
 <style lang="scss" scoped>

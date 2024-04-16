@@ -26,11 +26,11 @@ interface PokemonCardProps {
 import type { PokemonType, PokemonInfoType } from "~/types";
 import { get_key_value } from "~/functions";
 const props = defineProps<PokemonCardProps>();
-const pokemonData = ref<PokemonInfoType>();
+const pokemonData = ref<PokemonInfoType | null>(null);
 
 //@ts-ignore
-const success = data => { 
-  pokemonData.value = { ...data.value } as PokemonInfoType;
+const success = async data => { 
+  pokemonData.value = { ...data } as PokemonInfoType;
 };
 
 const imgSrc = computed(() => {
