@@ -24,8 +24,8 @@ export default defineNuxtConfig({
     '~/plugins/error-handler.ts'
   ],
   modules: [
-    '@pinia/nuxt', 
-    '@nuxt/image', 
+    '@pinia/nuxt',
+    '@nuxt/image',
     "@hebilicious/vue-query-nuxt",
     ['@nuxtjs/google-fonts', {
         families: {
@@ -34,6 +34,7 @@ export default defineNuxtConfig({
         }
       }
     ],
+    "@nuxtjs/sitemap"
   ],
   pinia: {
     storesDirs: ['./src/stores/**']
