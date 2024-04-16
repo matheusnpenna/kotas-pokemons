@@ -89,32 +89,3 @@ onBeforeUnmount(() => {
   });
 })
 </script>
-
-<style lang="scss" scoped>
-.home-view {
-  position: relative;
-  .scroll-area {
-    overflow-y: overlay;
-    overflow-y: scroll;
-    scrollbar-gutter: stable;
-
-    &::-webkit-scrollbar {
-      width: 13px;
-      height: 80%;
-      border-radius: 50px;
-      background-color: #C4C4C44F;
-    }
-  
-    &::-webkit-scrollbar-track {
-      background-color: #C4C4C44F;
-    }
-  
-    &::-webkit-scrollbar-thumb {
-      background-color: black;
-      border-radius: 50px;
-      height: 30px;
-      width: 20px;
-    }
-  }
-}
-</style>

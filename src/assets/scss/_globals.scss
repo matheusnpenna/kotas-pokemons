@@ -6,7 +6,7 @@ body {
   font-family: "Mulish", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #E1E1E1;
+  background-color: #F1F4F5;
   color: #000;
 
   &::-webkit-scrollbar {
@@ -24,4 +24,31 @@ body {
 
 .quicksand {
   font-size: "Quicksand", sans-serif;
+}
+
+.scroll-area {
+  @media screen and (min-width: 700px) {
+    overflow-y: overlay;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    max-height: 100vh;
+  
+    &::-webkit-scrollbar {
+      width: 13px;
+      height: 80%;
+      border-radius: 50px;
+      background-color: #C4C4C44F;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: #C4C4C44F;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: #00A3FF;
+      border-radius: 50px;
+      height: 30px;
+      width: 20px;
+    }
+  }
 }
