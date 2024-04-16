@@ -11,10 +11,6 @@ export const usePokemonStore = defineStore('pokemon', {
   state: () => {
     return {
       pokemons: reactive<PokemonType[]>([]),
-      pokemon: reactive<PokemonType>({
-        name: undefined,
-        url: ''
-      })
     };
   },
   actions: {
@@ -27,8 +23,6 @@ export const usePokemonStore = defineStore('pokemon', {
     },
     async getPokemonInfo(id: String | Number) {
       const { data } = await useFetch(`/pokemon/${id}`, GLOBAL_CONFIG);
-      // @ts-ignore
-      this.pokemon = data.value;
       return data.value;
     },
     async filterPokemon(term: string = "") {

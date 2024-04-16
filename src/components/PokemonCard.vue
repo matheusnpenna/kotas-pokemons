@@ -1,15 +1,15 @@
 <template>
-  <ActionDispatcher method-name="getPokemonInfo" :parameters="data.name" @success="success">
-    <NuxtLink v-if="info" :to="'/pokemon/'+data.name">
+  <ActionDispatcher method-name="getPokemonInfo" :parameters="props.data.name" @success="success">
+    <NuxtLink :to="'/pokemon/'+props.data.name">
       <div class="w-[153px] h-[190px] bg-white rounded-lg text-center flex flex-col items-center justify-center">
-        <NuxtImg v-if="imgSrc" class="object-contain h-20" :src="imgSrc" :alt="`${info.name}`" />
-        <span class="text-base font-bold mb-2">{{ info.name }}</span>
-        <span v-if="info" class="quicksand text-sm font-bold text-[9px] mb-8">Cód {{ info.id }}</span>
-        <div v-if="info" class="flex items-center justify-center flex-wrap">
-          <template v-for="(item, i) in info.types">
+        <NuxtImg v-if="imgSrc" class="object-contain h-20" :src="imgSrc" :alt="`${props.data.name}`" />
+        <span class="text-base font-bold mb-2">{{ props.data.name }}</span>
+        <span v-if="pokemonData" class="quicksand text-sm font-bold text-[9px] mb-8">Cód {{ pokemonData.id }}</span>
+        <div v-if="pokemonData" class="flex items-center justify-center flex-wrap">
+          <template v-for="(item, i) in pokemonData.types">
             <span 
               class="w-[64px] h-[16px] rounded-lg flex items-center justify-center text-white py-1 px-2 uppercase text-[8px]" 
-              :class="`bg-${item.type.name} ${i < info.types.length - 1 ? 'mr-1' : ''}`"
+              :class="`bg-${item.type.name} ${i < pokemonData.types.length - 1 ? 'mr-1' : ''}`"
             >
               {{ item.type.name }}
             </span>
@@ -23,19 +23,18 @@
 interface PokemonCardProps {
   data: PokemonType
 }
-import { get_key_value } from "~/functions";
 import type { PokemonType, PokemonInfoType } from "~/types";
+import { get_key_value } from "~/functions";
 const props = defineProps<PokemonCardProps>();
-const info = ref<PokemonInfoType|null>(null);
+const pokemonData = ref<PokemonInfoType>();
 //@ts-ignore
 const success = data => {
-  info.value = data.value;
+  pokemonData.value = data.value;
 };
-const pokemonID = computed(() => info?.value?.id || props.data.name);
 const imgSrc = computed(() => {
-  const sprites = info.value?.sprites;
-  if (!sprites) return "";
-  return get_key_value(sprites, ['front_default', 'front_shiny']);
+  return pokemonData.value && pokemonData.value?.sprites ? 
+    //@ts-ignore
+    get_key_value(pokemonData.value.sprites, ['front_default', 'front_shiny']) : "";
 });
 </script>
 <style lang="scss" scoped>

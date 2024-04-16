@@ -4,7 +4,7 @@ export function get_key_value(
   prefered_keys: string[]
 ): string {
   let value = "";
-  const prefered_key = prefered_keys.find(pfk => obj[pfk]) || "";
+  const prefered_key = prefered_keys.find(pfk => obj && obj[pfk]) || "";
   if (obj[prefered_key]) {
     value = `${obj[prefered_key]}`;
   } else {
