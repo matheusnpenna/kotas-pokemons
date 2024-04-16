@@ -2,7 +2,7 @@
 <template>
   <main class="default-template">
     <AppHeader />
-    <NuxtPage :page-key="route => route.fullPath" />
+    <slot></slot>
     <AppFooter />
   </main>
 </template>
