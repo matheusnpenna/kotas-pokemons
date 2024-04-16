@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import type { PokemonType, Parameters } from '~/types';
 
-const config = useRuntimeConfig()
+const baseURL = "https://pokeapi.co/api/v2";
+
 export const usePokemonStore = defineStore('pokemon', {
   state: () => {
     return {
@@ -14,20 +15,20 @@ export const usePokemonStore = defineStore('pokemon', {
         this.pokemons = [];
       }
       const query_params = new URLSearchParams(params);
-      const data = await $fetch(`${config.public.baseURL}/pokemon?${query_params}`);
+      const data = await $fetch(`${baseURL}/pokemon?${query_params}`);
       // @ts-ignore
       this.pokemons.push(...data.results)
       return data;
     },
     async getPokemonInfo(id: String | Number) {
-      const data = await $fetch(`${config.public.baseURL}/pokemon/${id}`);
+      const data = await $fetch(`${baseURL}/pokemon/${id}`);
       return data;
     },
     async filterPokemon(term: string = "") {
       let list: PokemonType[] = [];
       this.pokemons = [];
       try {
-        const data = await $fetch(`${config.public.baseURL}/pokemon/${term}`);
+        const data = await $fetch(`${baseURL}/pokemon/${term}`);
         //@ts-ignore
         list.push(data)
         this.pokemons = list;
