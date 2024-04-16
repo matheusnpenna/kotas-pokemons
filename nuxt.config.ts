@@ -20,6 +20,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [
+    '~/plugins/error-handler.ts'
+  ],
   modules: [
     '@pinia/nuxt', 
     '@nuxt/image', 
