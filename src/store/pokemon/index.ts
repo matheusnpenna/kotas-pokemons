@@ -1,12 +1,7 @@
 import { defineStore } from 'pinia'
-import type { UseFetchOptions } from "#app"
 import type { PokemonType, Parameters } from '~/types';
 
 const config = useRuntimeConfig()
-const GLOBAL_CONFIG: UseFetchOptions<object> = {
-  baseURL: config.public.baseURL
-}
-
 export const usePokemonStore = defineStore('pokemon', {
   state: () => {
     return {
@@ -16,20 +11,21 @@ export const usePokemonStore = defineStore('pokemon', {
   actions: {
     async getPokemons(params?: Parameters) {
       const query_params = new URLSearchParams(params);
-      const { data } = await useFetch(`/pokemon?${query_params}`, GLOBAL_CONFIG);
       // @ts-ignore
-      this.pokemons.push(...data.value.results)
-      return data.value;
+      const data = await $fetch(`${config.public.baseURL}/pokemon?${query_params}`);
+      // @ts-ignore
+      this.pokemons.push(...data.results)
+      return data;
     },
     async getPokemonInfo(id: String | Number) {
-      const { data } = await useFetch(`/pokemon/${id}`, GLOBAL_CONFIG);
-      return data.value;
+      const data = await $fetch(`${config.public.baseURL}/pokemon/${id}`);
+      return data;
     },
     async filterPokemon(term: string = "") {
-      const { data } = await useFetch(`/pokemon/${term}`, GLOBAL_CONFIG);
+      const data = await $fetch(`${config.public.baseURL}/pokemon/${term}`);
       // @ts-ignore
-      this.pokemons = [data.value];
-      return data.value;
+      this.pokemons = [data];
+      return data;
     },
   }
 })

@@ -11,10 +11,12 @@ export default {
         quicksand: ['Quicksand']
       },
       colors: {
+        "second-gray": "#616161",
         secondary: "#E1E1E1",
         grass: "#08FEC3",
         poison: "#AF08FE",
         water: "#00A3FF",
+        steel:  "#85826E",
         fire: "#FE0808",
         electric: "#FFB800",
         ground: "#85826E",
@@ -22,14 +24,15 @@ export default {
         normal: "#C4C4C4",
         flying: "#5317FC",
         default: "#0E0E0E",
-        "second-gray": "#616161",
+        dark: "#0E0E0E",
         bug: "#0E0E0E",
+        rock: "#0E0E0E",
         blue: "#00A3FF",
       }
     },
   },
   safelist: [{
-    pattern: /(bg|text|border)-(second-gray|secondary|grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
+    pattern: /(bg|text|border)-(dsdark|rock|second-gray|secondary|grass|poison|water|fire|eletric|ground|fairy|normal|flying|default|bug)/
   }],
   plugins: [],
 }

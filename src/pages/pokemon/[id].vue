@@ -33,7 +33,7 @@ import { get_key_value } from "~/functions";
 import type { PokemonInfoType } from "~/types";
 const { params } = useRoute();
 const { data } = await useAsyncData(
-  "pokemon-details-"+ params.id,
+  "getPokemonInfo"+ params.id,
   async () => await $fetch('https://pokeapi.co/api/v2/pokemon/'+params.id)
 );
 const pokemon = data.value as PokemonInfoType;

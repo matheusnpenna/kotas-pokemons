@@ -2,7 +2,8 @@
   <ActionDispatcher method-name="getPokemonInfo" :parameters="props.data.name" @success="success">
     <NuxtLink :to="'/pokemon/'+props.data.name">
       <div class="w-[153px] h-[190px] bg-white rounded-lg text-center flex flex-col items-center justify-center">
-        <NuxtImg v-if="imgSrc" class="object-contain h-20" :src="imgSrc" :alt="`${props.data.name}`" />
+        <NuxtImg v-if="imgSrc" class="object-contain h-20" fit="contain" :src="imgSrc" :alt="`${props.data.name}`" loading="lazy" />
+        {{ !!pokemonData }}
         <span class="text-base font-bold mb-2">{{ props.data.name }}</span>
         <span v-if="pokemonData" class="quicksand text-sm font-bold text-[9px] mb-8">Cód {{ pokemonData.id }}</span>
         <div v-if="pokemonData" class="flex items-center justify-center flex-wrap">
@@ -27,10 +28,12 @@ import type { PokemonType, PokemonInfoType } from "~/types";
 import { get_key_value } from "~/functions";
 const props = defineProps<PokemonCardProps>();
 const pokemonData = ref<PokemonInfoType>();
+
 //@ts-ignore
-const success = data => {
-  pokemonData.value = data.value;
+const success = data => { 
+  pokemonData.value = { ...data.value } as PokemonInfoType;
 };
+
 const imgSrc = computed(() => {
   return pokemonData.value && pokemonData.value?.sprites ? 
     //@ts-ignore
