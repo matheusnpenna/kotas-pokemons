@@ -4,7 +4,7 @@
       <div class="pokemon-card-component w-full h-[250px] md:h-[190px] bg-white rounded-lg text-center flex flex-col items-center justify-center py-4">
         <NuxtImg v-if="imgSrc" class="object-contain h-20" fit="contain" :src="imgSrc" :alt="`${props.data.name}`" loading="lazy" />
         <span class="text-base font-bold mb-2">{{ props.data.name }}</span>
-        <span v-if="pokemonData" class="quicksand text-wrap text-sm font-bold text-[9px] mb-6">Cód {{ pokemonData.id }}</span>
+        <span v-if="pokemonData" class="quicksand text-wrap text-sm font-bold text-[9px] mb-12">Cód {{ pokemonData.id }}</span>
         <div v-if="pokemonData" class="flex items-center justify-center flex-wrap">
           <template v-for="(item, i) in pokemonData.types">
             <span 
