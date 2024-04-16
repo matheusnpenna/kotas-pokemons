@@ -1,18 +1,18 @@
 <template>
   <div class="home-view pt-8">
-    <div class="container mx-auto px-20 lg:px-44">
-      <div class="pr-8">
-        <SearchInput 
-          v-model="search" 
-          placeholder="Pesquise por nome ou código" 
-          class="mb-12"
-        />
-      </div>
+    <div class="container scroll-area mx-auto px-10 md:px-20 lg:px-44">
+      <SearchInput 
+        v-model="search" 
+        placeholder="Pesquise por nome ou código" 
+        class="mb-12"
+      />
       <h3 class="font-bold mb-8">Pokémons</h3>
       <div v-if="store.pokemons.length == 0 && !isP">
-        <span class="text-slate-800">Não encontramos nenhum pokemon</span>
+        <span class="text-slate-500">
+          Não encontramos nenhum pokemon {{ search.length ? "com este nome ou id" : "" }}
+        </span>
       </div>
-      <div v-if="store.pokemons.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 content-end">
+      <div v-if="store.pokemons.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-12 lg:gap-4 xl:gap-9 w-full">
         <PokemonCard 
           v-for="(item, i) in store.pokemons"
           :key="`poke-card-${i}`"
@@ -89,4 +89,32 @@ onBeforeUnmount(() => {
   });
 })
 </script>
- 
+
+<style lang="scss" scoped>
+.home-view {
+  position: relative;
+  .scroll-area {
+    overflow-y: overlay;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+
+    &::-webkit-scrollbar {
+      width: 13px;
+      height: 80%;
+      border-radius: 50px;
+      background-color: #C4C4C44F;
+    }
+  
+    &::-webkit-scrollbar-track {
+      background-color: #C4C4C44F;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color: black;
+      border-radius: 50px;
+      height: 30px;
+      width: 20px;
+    }
+  }
+}
+</style>

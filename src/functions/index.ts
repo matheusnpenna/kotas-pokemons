@@ -12,8 +12,15 @@ export function get_key_value(
     if (key)  {
       if (typeof obj[key] == "string") {
         value = `${obj[key]}`;
-      } else if (typeof obj[key] == "object") {
-        value = get_key_value(Object(obj[key]), prefered_keys);
+      } else if (typeof obj[key] == "object" && key == "other") {
+        for (let j in obj[key]) {
+          //@ts-ignore
+          const v = get_key_value(obj[key][j], prefered_keys);
+          if (v) {
+            value = v;
+            break;
+          }
+        }
       }
     }
   }

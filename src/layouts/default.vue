@@ -10,7 +10,7 @@
 import AppFooter from '~/components/AppFooter.vue';
 import AppHeader from '~/components/AppHeader.vue';
 </script>
-<style>
+<style lang="scss" scoped>
 .default-template {
   display: flex;
   flex-direction: column;

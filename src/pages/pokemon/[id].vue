@@ -1,8 +1,8 @@
 <template>
   <div class="pokemon-detail-component pt-12">
-    <div v-if="pokemon" class="container mx-auto px-10 lg:px-60 xxl:px-76">
+    <div v-if="pokemon" class="container mx-auto px-0 lg:px-60 xxl:px-76">
       <div class="card flex flex-col items-center justify-center mb-8">
-        <NuxtImg class="object-contain h-28 mb-4" :src="imgSrc" :alt="`${pokemon.name}`" />
+        <NuxtImg v-if="imgSrc" class="object-contain h-28 mb-4" :src="imgSrc" :alt="`${pokemon.name}`" />
         <span class="quicksand text-sm font-bold mb-12">{{ pokemon.name }}</span>
         <div class="flex items-center justify-center flex-wrap">
           <template v-for="(item, i) in pokemon.types">
