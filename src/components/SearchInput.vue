@@ -23,6 +23,10 @@ const emit = defineEmits(['update:modelValue'])
     top: 50%;
     left: 98%;
     transform: translateX(-98%) translateY(-50%);
+    @media screen and (max-width: 991px) {
+      left: 95%;
+      transform: translateX(-95%) translateY(-50%);
+    }
   }
 
   input::placeholder {
@@ -32,8 +36,8 @@ const emit = defineEmits(['update:modelValue'])
   svg {
     position: absolute;
     top: 50%;
-    left: 2%;
-    transform: translateY(-50%) translateX(-2%);
+    left: 3%;
+    transform: translateY(-50%) translateX(-3%);
     @media screen and (min-width: 991px) {
       display: none;
     }
