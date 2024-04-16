@@ -9,7 +9,10 @@
         />
       </div>
       <h3 class="font-bold mb-8">Pokémons</h3>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 content-end">
+      <div v-if="store.pokemons.length == 0 && !isP">
+        <span class="text-slate-800">Não encontramos nenhum pokemon</span>
+      </div>
+      <div v-if="store.pokemons.length" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 content-end">
         <PokemonCard 
           v-for="(item, i) in store.pokemons"
           :key="`poke-card-${i}`"
@@ -52,7 +55,12 @@ const { fetchNextPage } = useInfiniteQuery({
 
 watch(search, (v) => {
   if (v.length == 0) {
-    store.getPokemons(params.value);
+    params.value = {
+      limit: 24,
+      offset: 0,
+      page: 1
+    };
+    store.getPokemons(params.value, { reset: true });
   } else {
     store.filterPokemon(search.value);
   }

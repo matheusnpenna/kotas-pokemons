@@ -37,7 +37,7 @@ const props = defineProps({
   }
 });
 
-const { isPending, isSuccess, isError, data, error } = useQuery({
+const { isPending, isSuccess, isError, data, error, refetch } = useQuery({
   queryKey: [`${props.methodName}`, props.parameters],
   queryFn: async () => await store[props.methodName](props.parameters)
 });
