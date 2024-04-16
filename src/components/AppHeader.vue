@@ -1,6 +1,6 @@
 <template>
   <header class="app-header bg-white flex items-center justify-center px-6">
-    <div class="w-full flex items-center justify-between">
+    <div class="w-full flex items-center justify-center lg:justify-start">
       <NuxtLink to="/" class="logo">
         <AppLogo />
       </NuxtLink>
