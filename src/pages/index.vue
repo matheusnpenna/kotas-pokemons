@@ -27,6 +27,8 @@ import SearchInput from "~/components/SearchInput";
 import PokemonCard from "~/components/PokemonCard";
 import { usePokemonStore } from "~/store/pokemon";
 const store = usePokemonStore();
+const router = useRouter();
+const route = useRoute();
 const endResults = ref(false);
 const search = ref("");
 const params = ref({
@@ -61,6 +63,10 @@ watch(search, (v) => {
       page: 1
     };
     store.getPokemons(params.value, { reset: true });
+    router.push({
+      ...route,
+      query: {}
+    })
   } else {
     store.filterPokemon(search.value);
   }
@@ -81,6 +87,9 @@ onMounted(() => {
   window.addEventListener("scroll", handleInfinityScroll, {
     passive: true
   });
+  if (route.query?.search) {
+    search.value = route?.query.search;
+  }
 });
 
 onBeforeUnmount(() => {

@@ -42,9 +42,9 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Kotas Pokemon Challenge - Matheus Penna',
+      title: 'Kotas Pokemon Challenge - Matheus Penna project',
       meta: [
-        { name: 'description', content: 'Kotas Pokemon Challenge by Coodesh - Matheus Penna' }
+        { name: 'description', content: 'Kotas Pokemon Challenge by Coodesh - Matheus Penna project' }
       ]
     }
   },

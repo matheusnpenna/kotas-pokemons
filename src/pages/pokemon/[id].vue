@@ -26,19 +26,26 @@
         <NuxtLink to="/" class="font-bold text-blue">Voltar</NuxtLink>
       </div>
     </div>
+    <div class="container mx-auto px-0 lg:px-60 xxl:px-76 text-center">
+      <span class="text-slate-400">Pokemon não encontrado, verifique se digitou corretamente o nome ou ID do pokemon</span>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import { get_src_in_sprites } from "~/functions";
 import type { PokemonInfoType } from "~/types";
-const { params } = useRoute();
-const { data } = await useAsyncData(
-  "getPokemonInfo"+ params.id,
-  async () => await $fetch('https://pokeapi.co/api/v2/pokemon/'+params.id)
+const route = useRoute();
+
+const { data, error } = await useAsyncData(
+  "getPokemonInfo"+ route?.params?.id || '',
+  async () => await $fetch('https://pokeapi.co/api/v2/pokemon/'+route.params.id)
 );
+
 const pokemon = data.value as PokemonInfoType;
+
 //@ts-ignore
 const imgSrc = pokemon ? get_src_in_sprites(pokemon.sprites, ['front_default', 'front_shiny']) : "";
+
 const { data: abData, status: abStatus } = await useAsyncData(
   "pokemon-ability-"+ pokemon.id,
   async () => {
