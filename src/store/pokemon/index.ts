@@ -28,7 +28,6 @@ export const usePokemonStore = defineStore('pokemon', {
       this.pokemons = [];
       try {
         const data = await $fetch(`${config.public.baseURL}/pokemon/${term}`);
-        console.log("TRY", data);
         //@ts-ignore
         list.push(data)
         this.pokemons = list;

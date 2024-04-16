@@ -38,10 +38,6 @@ const imgSrc = computed(() => {
     //@ts-ignore
     get_key_value(pokemonData.value.sprites, ['front_default', 'front_shiny']) : "";
 });
-
-watch(props.data, (v) => {
-  console.log(v)
-})
 </script>
 <style lang="scss" scoped>
 .pokemon-card-component {
