@@ -1,6 +1,6 @@
 <template>
   <div class="home-view pt-8">
-    <div class="container scroll-area mx-auto px-10 md:px-20 lg:px-44">
+    <div ref="infinityScrollWrapper" class="container scroll-area mx-auto px-10 md:px-20 lg:px-44">
       <SearchInput 
         v-model="search" 
         placeholder="Pesquise por nome ou código" 
@@ -22,6 +22,7 @@
           :data="item"
         />
       </div>
+      <div ref="infinityScrollSentinel" id="sentinel"></div>
     </div>
   </div>
 </template>
@@ -33,6 +34,8 @@ import { usePokemonStore } from "~/store/pokemon";
 const store = usePokemonStore();
 const router = useRouter();
 const route = useRoute();
+const infinityScrollWrapper = ref(null);
+const infinityScrollSentinel = ref(null);
 const endResults = ref(false);
 const search = ref("");
 const params = ref({
@@ -76,29 +79,35 @@ watch(search, (v) => {
   }
 })
 
-const handleInfinityScroll = () => {
-  if (
-    window.scrollY + window.innerHeight >=
-    document.body.scrollHeight - 100
-  ) {
-    if (!endResults.value) {
-      fetchNextPage();
-    }
-  }
-}
+// const handleInfinityScroll = () => {
+//   if (
+//     window.scrollY + window.innerHeight >=
+//     document.body.scrollHeight - 200
+//   ) {
+//     if (!endResults.value) {
+//       fetchNextPage();
+//     }
+//   }
+// }
 
 onMounted(() => {
-  window.addEventListener("scroll", handleInfinityScroll, {
-    passive: true
+  const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            if (!endResults.value) {
+              fetchNextPage();
+            }
+          }
+      })
+  }, { root: infinityScrollWrapper.value })
+
+  observer.observe(infinityScrollSentinel.value)
+    if (route.query?.search) {
+      search.value = route?.query.search;
+    }
   });
-  if (route.query?.search) {
-    search.value = route?.query.search;
-  }
-});
 
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleInfinityScroll, {
-    passive: true
-  });
+  if (observer) observer.disconnect()
 })
 </script>

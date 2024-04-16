@@ -26,9 +26,6 @@
         <NuxtLink to="/" class="font-bold text-blue">Voltar</NuxtLink>
       </div>
     </div>
-    <div class="container mx-auto px-0 lg:px-60 xxl:px-76 text-center">
-      <span class="text-slate-400">Pokemon não encontrado, verifique se digitou corretamente o nome ou ID do pokemon</span>
-    </div>
   </div>
 </template>
 <script setup lang="ts">

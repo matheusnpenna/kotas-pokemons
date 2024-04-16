@@ -72,3 +72,8 @@ This project was made using the following technologies:
 
 #### About the error handling
 - I did basic error management just to not leave the user without guidance if an untreated error occurs in the system. This one could be improved.
+
+#### About the usability
+- I added a simple loading to better inform the user of the application's status when requesting data from the API
+- To facilitate sharing the page, I added a parameter called search to the URL in order to be able to search based on the parameter passed in the URL and thus share the URL with the search to be performed.
+
