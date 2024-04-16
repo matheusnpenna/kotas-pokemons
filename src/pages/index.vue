@@ -6,7 +6,10 @@
         placeholder="Pesquise por nome ou código" 
         class="mb-12"
       />
-      <h3 class="font-bold mb-8">Pokémons</h3>
+      <div class="flex items-center mb-8">
+        <h3 class="font-bold mr-4">Pokémons</h3>
+        <LoadingSpinner v-if="isPending" />
+      </div>
       <div v-if="store.pokemons.length == 0 && !isP">
         <span class="text-slate-500">
           Não encontramos nenhum pokemon {{ search.length ? "com este nome ou id" : "" }}
@@ -23,6 +26,7 @@
   </div>
 </template>
 <script setup>
+import LoadingSpinner from "~/components/LoadingSpinner.vue";
 import SearchInput from "~/components/SearchInput";
 import PokemonCard from "~/components/PokemonCard";
 import { usePokemonStore } from "~/store/pokemon";
@@ -37,7 +41,7 @@ const params = ref({
   page: 1
 });
 
-const { fetchNextPage } = useInfiniteQuery({
+const { fetchNextPage, isPending } = useInfiniteQuery({
   queryKey: ['getPokemons'],
   queryFn: async ({ pageParam }) => await store.getPokemons(pageParam),
   getNextPageParam(lastPage) {
