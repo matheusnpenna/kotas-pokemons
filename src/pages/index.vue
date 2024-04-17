@@ -75,7 +75,7 @@ watch(search, (v) => {
       query: {}
     })
   } else {
-    store.filterPokemon(search.value);
+    store.filterPokemon(v);
   }
 })
 
@@ -83,7 +83,7 @@ onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
           if (entry.isIntersecting) {
-            if (!endResults.value) {
+            if (!endResults.value && search.value.length == 0) {
               fetchNextPage();
             }
           }
@@ -91,12 +91,9 @@ onMounted(() => {
   }, { root: infinityScrollWrapper.value })
 
   observer.observe(infinityScrollSentinel.value)
-    if (route.query?.search) {
-      search.value = route?.query.search;
-    }
-  });
 
-onBeforeUnmount(() => {
-  if (observer) observer.disconnect()
-})
+  if (route.query?.search) {
+    search.value = route?.query.search;
+  }
+});
 </script>
