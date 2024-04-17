@@ -9,7 +9,10 @@
           <template v-for="(item, i) in pokemonData.types">
             <span 
               class="w-[64px] h-[16px] rounded-lg flex items-center justify-center text-white py-1 px-2 uppercase text-[8px]" 
-              :class="i < pokemonData.types.length - 1 ? 'mr-1' : '' + 'bg-'+item.type.name"
+              :class="{
+                'mr-1': i < pokemonData.types.length - 1,
+                ['bg-'+item.type.name]: true
+              }"
             >
               {{ item.type.name }}
             </span>
