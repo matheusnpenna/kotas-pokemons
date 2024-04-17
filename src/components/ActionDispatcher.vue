@@ -1,21 +1,12 @@
 <template>
   <div class="action-dispatcher">
-    <template v-if="isPending">
-      <div class="text-center">
-        <svg class="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
-      </div>
-    </template>
-
     <div
-      v-else-if="error"
+      v-if="error"
       class="error centering text-center p-5"
     >
       <div class="text-secondary mb-3">
         O recurso que você está buscando não foi encontrado.
       </div>
-      <!-- <button class="btn-link btn" @click="dispatch">
-        Tentar novamente
-      </button> -->
     </div>
 
     <slot v-else v-bind:data="data" />
@@ -37,7 +28,7 @@ const props = defineProps({
   }
 });
 
-const { isPending, isSuccess, isError, data, error, refetch } = useQuery({
+const { isPending, isSuccess, isError, data, error } = useQuery({
   queryKey: [`${props.methodName}`, props.parameters],
   queryFn: async () => await store[props.methodName](props.parameters)
 });

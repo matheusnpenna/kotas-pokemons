@@ -2,7 +2,6 @@
 import { resolve } from 'path'
 
 export default defineNuxtConfig({
-  pages: false,
   devtools: { enabled: true },
   srcDir: "src/",
   css: ['/assets/css/app.css', '/assets/scss/app.scss'],

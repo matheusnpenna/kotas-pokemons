@@ -27,9 +27,6 @@
   </div>
 </template>
 <script setup>
-definePageMeta({
-  layout: 'default'
-})
 import LoadingSpinner from "~/components/LoadingSpinner.vue";
 import SearchInput from "~/components/SearchInput";
 import PokemonCard from "~/components/PokemonCard";
