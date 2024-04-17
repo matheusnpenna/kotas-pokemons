@@ -78,3 +78,5 @@ This project was made using the following technologies:
 - To facilitate sharing the page, I added a parameter called search to the URL in order to be able to search based on the parameter passed in the URL and thus share the URL with the search to be performed.
 - I improved infinite scroll to use observer and enable infinite scroll to work based on the element of the dom that is being scrolled instead of working based on the entire document. This way, the element's scrollbar can trigger infinite scrolling.
 
+#### About the tests
+- The pokemon card component depends on a request to display its content correctly, this can be a point of failure if there is a rendering problem, the information is not passed between components correctly or the Tanstack Query cache is being managed inappropriately . To ensure that this failure does not happen, I created a test that simulates the request and checks if the component showed the correct information
